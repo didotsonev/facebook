@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 class UserController extends Controller
 {
@@ -31,5 +32,24 @@ class UserController extends Controller
     public function create(Request $request)
     {
         return view('create');
+    }
+
+    public function edit(Request $request, User $user)
+    {
+        return view('edit', [
+            'user' => $user
+        ]);
+    }
+
+    public function update(Request $request, User $user) {
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+        ]);
+    }
+
+    public function destroy(Request $request, User $user)
+    {
+        $user->delete();
     }
 }
