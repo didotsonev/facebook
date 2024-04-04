@@ -43,6 +43,4 @@ class UserApiTest extends TestCase
             User::EMAIL => $data[User::EMAIL],
         ]);
     }
-
-    
 }
