@@ -6,6 +6,8 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UserIndexRequest extends FormRequest
 {
+    const WHERE_EMAIL = 'whereEmail';
+
     /**
      * Determine if the user is authorized to make this request.
      */
