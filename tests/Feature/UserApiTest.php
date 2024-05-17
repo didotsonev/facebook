@@ -118,6 +118,33 @@ class UserApiTest extends TestCase
             ->assertInvalid(User::NAME);
     }
 
+    public function testStoreValidateEmailIsUnique()
+    {
+        $user = User::factory()->create();
+        $data = User::factory()->raw([
+            User::EMAIL => $user->{User::EMAIL},
+        ]);
+        $url = $this->storeRoute();
+
+        $this
+            ->postJson($url, $data)
+            ->assertUnprocessable()
+            ->assertInvalid(User::EMAIL);
+    }
+
+    public function testUpdateValidateNameIsRequired()
+    {
+        $user = User::factory()->create();
+        $data = User::factory()->raw();
+        unset($data[User::NAME]);
+
+        $url = $this->updateRoute($user->{User::ID});
+        $this
+            ->putJson($url, $data)
+            ->assertUnprocessable()
+            ->assertInvalid(User::NAME);
+    }
+
     public function testShow()
     {
         $user = User::factory()->create();

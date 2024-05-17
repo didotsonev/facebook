@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UserStoreRequest extends FormRequest
 {
@@ -28,7 +30,7 @@ class UserStoreRequest extends FormRequest
                 'max:255',
             ],
             'email' => [
-
+                Rule::unique(User::TABLE, User::EMAIL),
             ],
             'password' => [
 
